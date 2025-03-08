@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=productsDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    command: [ "redis-server", "--protected-mode", "no" ]
+    restart: always
+    ports:
+      - "6379:6379"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATASOURCE_URL: ${ENV_DATASOURCE_URL}
+      DATASOURCE_USERNAME: ${ENV_DATASOURCE_USERNAME}
+      DATASOURCE_PASSWORD: ${ENV_DATASOURCE_PASSWORD}
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+volumes:
+  postgres_data:

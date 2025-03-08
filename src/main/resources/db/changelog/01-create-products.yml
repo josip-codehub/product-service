@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: root
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(10)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_eur
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_available
+                  type: boolean
+                  constraints:
+                    nullable: false
