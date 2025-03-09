@@ -1,6 +1,5 @@
 package com.ingemark.demo.products.model.entity;
 
-import com.ingemark.demo.products.model.common.Identifiable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -8,8 +7,11 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "products", schema = "public")
+@Table(name = Product.TABLE_NAME, schema = "public")
 public class Product extends Identifiable {
+
+    static final String TABLE_NAME = "products";
+
     @Column(unique = true, nullable = false, length = 10)
     private String code;
 

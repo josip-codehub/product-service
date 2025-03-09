@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-public record ProductRequestDTO (
+public record ProductRequestDto(
         @Size(min = 10, max = 10, message = "Code must be exactly 10 characters long")
         @UniqueCode
         String code,

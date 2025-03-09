@@ -1,4 +1,4 @@
-package com.ingemark.demo.products.model.common;
+package com.ingemark.demo.products.model.entity;
 
 import jakarta.persistence.*;
 
@@ -11,7 +11,7 @@ public abstract class Identifiable {
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    public Identifiable() {
+    protected Identifiable() {
     }
 
     public UUID getId() {

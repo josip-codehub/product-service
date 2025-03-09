@@ -8,12 +8,15 @@ public class UniqueCodeValidator implements ConstraintValidator<UniqueCode, Stri
 
     private final ProductRepository productRepository;
 
-    public UniqueCodeValidator(ProductRepository productRepository) {
+    public UniqueCodeValidator(final ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
-    public boolean isValid(String code, ConstraintValidatorContext context) {
+    public boolean isValid(
+            final String code,
+            final ConstraintValidatorContext context
+    ) {
         return code != null && !productRepository.existsByCode(code);
     }
 }

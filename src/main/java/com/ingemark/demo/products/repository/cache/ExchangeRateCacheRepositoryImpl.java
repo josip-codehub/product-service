@@ -13,18 +13,23 @@ public class ExchangeRateCacheRepositoryImpl implements ExchangeRateCacheReposit
 
     private final RedisTemplate<String, BigDecimal> redisTemplate;
 
-    public ExchangeRateCacheRepositoryImpl(RedisTemplate<String, BigDecimal> redisTemplate) {
+    public ExchangeRateCacheRepositoryImpl(final RedisTemplate<String, BigDecimal> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
     @Override
-    public void saveExchangeRate(String key, BigDecimal exchangeRate) {
-        long ttl = TimeUtil.calculateTimeToMidnight();
-        redisTemplate.opsForValue().set(key, exchangeRate, ttl, TimeUnit.SECONDS);
+    public void saveExchangeRate(
+            final String key,
+            final BigDecimal exchangeRate
+    ) {
+        final long ttl = TimeUtil.calculateTimeToMidnight();
+        redisTemplate
+                .opsForValue()
+                .set(key, exchangeRate, ttl, TimeUnit.SECONDS);
     }
 
     @Override
-    public Optional<BigDecimal> getExchangeRate(String key) {
+    public Optional<BigDecimal> getExchangeRate(final String key) {
         return Optional.ofNullable(redisTemplate.opsForValue().get(key));
     }
 }

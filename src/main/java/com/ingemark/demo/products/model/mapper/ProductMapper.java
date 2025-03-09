@@ -1,14 +1,17 @@
 package com.ingemark.demo.products.model.mapper;
 
-import com.ingemark.demo.products.model.dto.ProductRequestDTO;
-import com.ingemark.demo.products.model.dto.ProductResponseDTO;
+import com.ingemark.demo.products.model.dto.ProductRequestDto;
+import com.ingemark.demo.products.model.dto.ProductResponseDto;
 import com.ingemark.demo.products.model.entity.Product;
 
 import java.math.BigDecimal;
 
 public class ProductMapper {
 
-    public static Product toEntity(ProductRequestDTO requestDTO) {
+    private ProductMapper() {
+    }
+
+    public static Product toEntity(final ProductRequestDto requestDTO) {
         if (requestDTO == null) {
             return null;
         }
@@ -22,17 +25,20 @@ public class ProductMapper {
         return product;
     }
 
-    public static ProductResponseDTO toResponseDTO(Product product) {
+    public static ProductResponseDto toResponseDto(
+            final Product product,
+            final BigDecimal exchangeRate
+    ) {
         if (product == null) {
             return null;
         }
 
-        return new ProductResponseDTO(
+        return new ProductResponseDto(
                 product.getId(),
                 product.getCode(),
                 product.getName(),
                 product.getPriceEur(),
-                product.getPriceEur().multiply(BigDecimal.valueOf(1.1)),
+                product.getPriceEur().multiply(exchangeRate),
                 product.isAvailable()
         );
     }

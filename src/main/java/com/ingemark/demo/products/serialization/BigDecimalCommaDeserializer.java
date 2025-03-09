@@ -6,15 +6,18 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class BigDecimalCommaDeserializer extends JsonDeserializer<BigDecimal> {
     @Override
-    public BigDecimal deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        String value = p.getText();
-        if (value != null) {
-            value = value.replace(",", ".");
-            return new BigDecimal(value);
-        }
-        return null;
+    public BigDecimal deserialize(
+            final JsonParser p,
+            final DeserializationContext context
+    ) throws IOException {
+        return Optional
+                .ofNullable(p.getText())
+                .map(s -> s.replace(",", "."))
+                .map(BigDecimal::new)
+                .orElse(null);
     }
 }

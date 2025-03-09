@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 public interface ExchangeRateService {
-    Mono<BigDecimal> getExchangeRate(String currency);
+    Mono<BigDecimal> getExchangeRate(final String currency);
 }

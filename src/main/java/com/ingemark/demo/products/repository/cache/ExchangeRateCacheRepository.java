@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public interface ExchangeRateCacheRepository {
-    void saveExchangeRate(String key, BigDecimal exchangeRate);
-    Optional<BigDecimal> getExchangeRate(String key);
+    void saveExchangeRate(
+            final String key,
+            final BigDecimal exchangeRate
+    );
+    Optional<BigDecimal> getExchangeRate(final String key);
 }

@@ -13,14 +13,14 @@ import java.math.BigDecimal;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, BigDecimal> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, BigDecimal> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
+    public RedisTemplate<String, BigDecimal> redisTemplate(final RedisConnectionFactory redisConnectionFactory) {
+        final RedisTemplate<String, BigDecimal> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
 
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 
-        template.afterPropertiesSet();
-        return template;
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 }
